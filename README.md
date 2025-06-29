@@ -21,6 +21,12 @@ Since both redis and redis insights are in the same docker stack, we need to ref
 
 ## Start App
 
+The Spring Cache abstraction uses annotations to define cache behavior:
+* @EnableCaching: Enables Spring's annotation-driven cache management.
+* @Cacheable: Indicates that the method's return value should be cached.
+* @CachePut: Updates the cache without interfering with the method execution.
+* @CacheEvict: Removes data from the cache.
+
 1. Add products POST http://localhost:8080/api/products
 
 {
@@ -29,11 +35,12 @@ Since both redis and redis insights are in the same docker stack, we need to ref
 }
 Check Redis Insights for cache put entry
 
-2. Fetch all products GET http://localhost:8080/api/products
+2. Fetch all products (not cacheable)
+GET http://localhost:8080/api/products
 
-This is not fetched from cache and fetched directly from my-sql. You can check hibernate query in the log to verify
+This is fetched directly from my-sql. You can check hibernate query in the log to verify
 
-3. Fetch a particular porduct (cacheable)
+3. Fetch a particular product (cacheable)
    GET http://localhost:8080/api/products/4
 
 No query fired to database. Check log.
