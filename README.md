@@ -50,6 +50,16 @@ No query fired to database. Check log.
    DB entry is deleted and Cache is evicted as well.
 
 
+## Cache Eviction policy
+1. Create a redis.conf file in the same directory as your docker-compose.yml. This file will contain your desired Redis configuration.
+2. Modify your docker-compose.yml to mount the redis.conf file into the Redis container.
+```
+  - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+```
+3. [Overview of Redis key eviction policies](https://redis.io/docs/latest/develop/reference/eviction/)
+
+
 ## Acknowledgements
 
 - [Spring Boot - Caching with Redis](https://www.geeksforgeeks.org/advance-java/spring-boot-caching-with-redis/)
